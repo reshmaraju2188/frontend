@@ -63,7 +63,6 @@
       <input type="email" name="email" placeholder="Email Address" required>
       <input type="text" name="address" placeholder="Shipping Address" required>
 
-      <!-- Product dropdown with ID added -->
       <select name="product" id="product" required>
         <option value="">Select a product</option>
         <option value="Phone">📱 Phone</option>
@@ -77,7 +76,6 @@
         <option value="Memory Card">💾 Memory Card</option>
       </select>
 
-      <!-- Dynamic price display -->
       <p id="priceDisplay"></p>
 
       <input type="number" name="quantity" id="quantity" placeholder="Quantity" required min="1">
@@ -87,7 +85,6 @@
     </form>
   </div>
 
-  <!-- Form Submission Script -->
   <script>
     const form = document.getElementById('orderForm');
     form.addEventListener('submit', async function (e) {
@@ -106,23 +103,22 @@
 
         const text = await response.text();
 
-        if (response.ok && text.includes("✅")) {
+        if (response.ok) {
           const email = form.email.value;
-          alert(`✅ ${text}\n📨 Confirmation email sent to: ${email}`);
+          alert(`${text}\nConfirmation email sent to: ${email}`);
           form.reset();
           document.getElementById("priceDisplay").textContent = "";
           document.getElementById("totalDisplay").textContent = "";
         } else {
-          alert("⚠️ Order failed: " + text);
+          alert("Order failed: " + text);
         }
 
       } catch (error) {
-        alert("❌ Error connecting to server.\n" + error);
+        alert("Error connecting to server.\n" + error);
       }
     });
   </script>
 
-  <!-- Product Price and Total Calculation Script -->
   <script>
     const prices = {
       "Phone": 15000,
